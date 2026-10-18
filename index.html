@@ -140,7 +140,7 @@ footer { text-align: center; padding: 40px 16px; color: var(--text-muted); font-
       <div class="total">Total: <span id="total">R$ 0,00</span></div>
       
       <h3 style="font-size: 16px; margin-top: 25px; color: #402732;">Dados de Entrega & Contato</h3>
-      <form id="orderForm" onsubmit="sendOrder(event)">
+      <form id="orderForm">
         <div style="margin-bottom:12px"><label class="selector-label" for="name">Seu nome completo *</label><input id="name" required placeholder="Ex: Maria Silva"></div>
         <div style="margin-bottom:12px"><label class="selector-label" for="phone">Telefone / WhatsApp</label><input id="phone" placeholder="(21) 99999-9999" inputmode="tel"></div>
         <div style="margin-bottom:12px"><label class="selector-label" for="delivery">Forma de Envio *</label><select id="delivery" required onchange="toggleAddress()"><option value="">Selecione...</option><option value="Entrega">Receber em Casa (Entrega)</option><option value="Retirada">Retirar na Boutique</option></select></div>
@@ -296,16 +296,9 @@ function updateCart() {
     `;
   }).join("");
   
-  document.querySelector("#total").innerText = brl(total);
-}
-
-function toggleAddress() {
-  const delivery = document.querySelector("#delivery").value;
-  document.querySelector("#addressFields").style.display = delivery === "Entrega" ? "block" : "none";
-}
-
-function sendOrder(e) {
+  document.getElementById("orderForm").addEventListener("submit", function(e) {
   e.preventDefault();
+  
   if (cart.length === 0) {
     alert("Sua sacola está vazia!");
     return;
@@ -348,8 +341,10 @@ function sendOrder(e) {
     text += "📝 *Obs:* " + notesField + "\n";
   }
   
-  window.open("https://whatsapp.com" + WHATSAPP + "&text=" + encodeURIComponent(text));
-}
+  var linkWhats = "https://api.whatsapp.com/send?phone=" + WHATSAPP + "&text=" + encodeURIComponent(text);
+  window.open(linkWhats, "_blank");
+});
+
 
 
 renderCategories();
