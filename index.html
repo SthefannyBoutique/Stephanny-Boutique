@@ -3,128 +3,332 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="theme-color" content="#d94f8a">
-<title>Stephanny Boutique | Moda feminina</title>
+<meta name="theme-color" content="#c94a73">
+<title>Stephanny Boutique | Moda Feminina</title>
 <style>
-:root{--pink:#d94f8a;--rose:#fff0f6;--ink:#34242d;--muted:#75636c;--line:#f0dce5;--white:#fff}
-*{box-sizing:border-box}body{margin:0;background:#fffafb;color:var(--ink);font:16px/1.45 Arial,Helvetica,sans-serif}
-header{background:linear-gradient(120deg,#fce0ec,#fff7fb);padding:24px 16px;text-align:center;border-bottom:1px solid var(--line)}
-.brand{font-family:Georgia,serif;font-size:clamp(28px,6vw,44px);font-weight:bold;color:#a82e65;letter-spacing:.3px}
-header p{margin:7px 0;color:#6d4a5b} .wrap{max-width:1100px;margin:auto;padding:18px 14px}
-.toolbar{display:flex;gap:10px;flex-wrap:wrap;align-items:center;justify-content:space-between;margin-bottom:16px}
-input,select,textarea{font:inherit;border:1px solid #e4cbd6;border-radius:10px;padding:11px;background:white;color:var(--ink);width:100%}
-.search{max-width:340px}.cartbutton,.btn{border:0;background:var(--pink);color:white;border-radius:10px;padding:12px 16px;font-weight:bold;cursor:pointer}
-.cartbutton{white-space:nowrap}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:15px}
-.card{border:1px solid var(--line);border-radius:15px;background:white;overflow:hidden;box-shadow:0 4px 15px #6e29400a}
-.productpic{height:175px;background:linear-gradient(135deg,#fbe3ed,#fff7fa);display:flex;align-items:center;justify-content:center;color:#b55a80;font-size:48px}
-.cardbody{padding:13px}.card h3{margin:0 0 5px;font-size:17px}.muted{color:var(--muted);font-size:13px}.price{font-size:19px;font-weight:bold;color:#a82e65;margin:8px 0}
-.card select{margin:4px 0 9px}.btn{width:100%}.sectiontitle{font-size:22px;margin:25px 0 12px}
-.panel{background:white;border:1px solid var(--line);border-radius:15px;padding:16px;margin-top:20px}
-.cartrow{display:grid;grid-template-columns:1fr auto;gap:10px;padding:12px 0;border-bottom:1px solid var(--line)}
-.qty{display:flex;align-items:center;gap:8px}.qty button{border:1px solid var(--line);background:#fff0f6;border-radius:7px;padding:5px 10px}
-.total{font-size:21px;font-weight:bold;text-align:right;margin:15px 0}
-.formgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px}
-label{display:block;font-weight:bold;font-size:14px;margin-bottom:5px}.hint{font-size:13px;color:var(--muted)}
-footer{text-align:center;padding:24px 12px;color:var(--muted);font-size:13px}
-a{color:#a82e65}
-@media(min-width:760px){.layout{display:grid;grid-template-columns:1.6fr 1fr;gap:20px;align-items:start}.panel{margin-top:0;position:sticky;top:12px}}
+:root {
+  --primary: #c94a73;
+  --primary-hover: #b03a60;
+  --bg-light: #fffcfd;
+  --card-bg: #ffffff;
+  --text-main: #2b1f25;
+  --text-muted: #7d6b73;
+  --border-color: #f5e6ec;
+}
+* { box-sizing: border-box; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; }
+body { margin: 0; background-color: var(--bg-light); color: var(--text-main); -webkit-font-smoothing: antialiased; }
+
+header { 
+  background: linear-gradient(135deg, #fbe6ee 0%, #fff6f9 50%, #f6e8ec 100%);
+  padding: 40px 20px; 
+  text-align: center; 
+  border-bottom: 1px solid var(--border-color);
+}
+.brand { 
+  font-family: "Playfair Display", "Georgia", serif; 
+  font-size: clamp(32px, 7vw, 48px); 
+  font-weight: 700; 
+  color: #8c274c; 
+  letter-spacing: 1px;
+  margin-bottom: 8px;
+}
+header p { margin: 4px 0; color: var(--text-muted); font-size: 14px; }
+.info-line { display: flex; flex-wrap: wrap; justify-content: center; gap: 15px; margin-top: 12px; font-weight: 500; color: #523b46; }
+
+.wrap { max-width: 1200px; margin: auto; padding: 24px 16px; }
+
+.toolbar { 
+  display: flex; 
+  gap: 15px; 
+  flex-wrap: wrap; 
+  align-items: center; 
+  justify-content: space-between; 
+  margin-bottom: 24px;
+}
+input, select, textarea { 
+  font: inherit; 
+  border: 1px solid #e1cbd4; 
+  border-radius: 8px; 
+  padding: 12px; 
+  background: white; 
+  color: var(--text-main); 
+  width: 100%;
+  transition: all 0.2s ease;
+}
+input:focus, select:focus, textarea:focus { outline: none; border-color: var(--primary); box-shadow: 0 0 0 3px rgba(201, 74, 115, 0.1); }
+.search { max-width: 400px; }
+
+.categories { display: flex; gap: 8px; overflow-x: auto; padding-bottom: 10px; margin-bottom: 20px; scrollbar-width: none; }
+.categories::-webkit-scrollbar { display: none; }
+.cat-btn { background: #fdf2f5; border: 1px solid var(--border-color); padding: 8px 16px; border-radius: 20px; cursor: pointer; color: var(--text-muted); font-weight: 500; white-space: nowrap; transition: all 0.2s; }
+.cat-btn.active, .cat-btn:hover { background: var(--primary); color: white; border-color: var(--primary); }
+
+.cartbutton { 
+  border: 0; background: var(--primary); color: white; border-radius: 8px; 
+  padding: 12px 20px; font-weight: bold; cursor: pointer; display: flex; align-items: center; gap: 8px;
+  box-shadow: 0 4px 12px rgba(201, 74, 115, 0.2); transition: all 0.2s;
+}
+.cartbutton:hover { background: var(--primary-hover); transform: translateY(-1px); }
+
+.grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: 20px; }
+.card { 
+  border: 1px solid var(--border-color); border-radius: 12px; background: var(--card-bg); 
+  overflow: hidden; box-shadow: 0 4px 15px rgba(110, 41, 64, 0.03); transition: transform 0.2s, box-shadow 0.2s;
+}
+.card:hover { transform: translateY(-4px); box-shadow: 0 8px 24px rgba(110, 41, 64, 0.08); }
+.productpic { 
+  height: 200px; background: linear-gradient(135deg, #fdf0f4 0%, #fffbfd 100%); 
+  display: flex; align-items: center; justify-content: center; font-size: 54px;
+  border-bottom: 1px solid rgba(245, 230, 240, 0.6);
+}
+.cardbody { padding: 16px; }
+.card h3 { margin: 0 0 6px; font-size: 18px; font-weight: 600; }
+.muted { color: var(--text-muted); font-size: 13px; }
+.price { font-size: 20px; font-weight: 700; color: #8c274c; margin: 10px 0; }
+.from-text { font-size: 12px; font-weight: normal; color: var(--text-muted); display: block; margin-bottom: 2px; }
+.selector-label { font-size: 12px; font-weight: 600; color: var(--text-muted); display: block; margin: 8px 0 4px; }
+.card select { margin-bottom: 14px; padding: 8px; font-size: 14px; }
+
+.btn { border: 0; background: var(--primary); color: white; border-radius: 8px; padding: 12px; font-weight: bold; cursor: pointer; width: 100%; transition: background 0.2s; }
+.btn:hover { background: var(--primary-hover); }
+
+.sectiontitle { font-family: "Playfair Display", serif; font-size: 24px; margin: 0 0 16px; color: #402732; }
+.panel { background: white; border: 1px solid var(--border-color); border-radius: 12px; padding: 20px; box-shadow: 0 4px 20px rgba(0,0,0,0.02); }
+.cartrow { display: grid; grid-template-columns: 1fr auto; gap: 10px; padding: 12px 0; border-bottom: 1px solid var(--border-color); }
+.qty { display: flex; align-items: center; gap: 8px; margin-top: 6px; }
+.qty button { border: 1px solid var(--border-color); background: #fff5f8; border-radius: 6px; padding: 4px 10px; cursor: pointer; font-weight: bold; }
+.total { font-size: 22px; font-weight: bold; text-align: right; margin: 20px 0; color: #8c274c; }
+.hint { font-size: 13px; color: var(--text-muted); margin-bottom: 15px; line-height: 1.4; }
+
+footer { text-align: center; padding: 40px 16px; color: var(--text-muted); font-size: 13px; border-top: 1px solid var(--border-color); margin-top: 40px; background: #fff6f8; }
+
+@media(min-width: 800px) {
+  .layout { display: grid; grid-template-columns: 1.5fr 1fr; gap: 30px; align-items: start; }
+  .panel { position: sticky; top: 20px; }
+}
 </style>
 </head>
 <body>
+
 <header>
   <div class="brand">Stephanny Boutique</div>
-  <p>Realce a sua beleza, expresse sua essência.</p>
-  <p>📍 Travessa B, 17 — Caminho das Oliveiras, Jardim Maravilha, Guaratiba/RJ</p>
-  <p>📱 WhatsApp: (21) 97673-6927 · Instagram: @stephanny.boutique</p>
+  <p style="font-style: italic; font-size: 16px; color: #8c274c; margin-bottom: 12px;">Realce a sua beleza, expresse sua essência.</p>
+  <div class="info-line">
+    <span>📍 Travessa B, 17 — Guaratiba/RJ</span>
+    <span>📱 (21) 97673-6927</span>
+    <span>📸 @stephanny.boutique</span>
+  </div>
 </header>
+
 <main class="wrap">
   <div class="toolbar">
-    <input class="search" id="search" placeholder="Buscar produto..." aria-label="Buscar produto">
-    <button class="cartbutton" onclick="document.querySelector('#checkout').scrollIntoView({behavior:'smooth'})">🛍️ Carrinho (<span id="cartCount">0</span>)</button>
+    <input class="search" id="search" placeholder="Buscar produto na boutique..." aria-label="Buscar produto" oninput="renderProducts()">
+    <button class="cartbutton" onclick="document.querySelector('#checkout').scrollIntoView({behavior:'smooth'})">🛍️ Ver Sacola (<span id="cartCount">0</span>)</button>
   </div>
+
+  <div class="categories" id="categoryContainer"></div>
+
   <div class="layout">
     <section>
-      <h2 class="sectiontitle">Escolha suas peças</h2>
-      <p class="hint">Modelo inicial: substitua os produtos de exemplo por fotos, nomes, tamanhos e preços reais da loja.</p>
+      <h2 class="sectiontitle">Coleção Exclusiva</h2>
       <div class="grid" id="products"></div>
     </section>
+
     <aside class="panel" id="checkout">
-      <h2 class="sectiontitle" style="margin-top:0">Seu pedido</h2>
-      <div id="cart"><p class="muted">Seu carrinho está vazio. Adicione uma peça para começar.</p></div>
+      <h2 class="sectiontitle" style="margin-top:0; border-bottom: 2px solid var(--border-color); padding-bottom: 10px;">Sua Sacola</h2>
+      <div id="cart"><p class="muted">Sua sacola está vazia. Adicione uma peça linda para começar!</p></div>
       <div class="total">Total: <span id="total">R$ 0,00</span></div>
-      <h3>Dados para finalizar</h3>
-      <form id="orderForm">
-        <div style="margin-bottom:10px"><label for="name">Seu nome *</label><input id="name" required placeholder="Nome completo"></div>
-        <div style="margin-bottom:10px"><label for="phone">Telefone</label><input id="phone" placeholder="(21) 99999-9999" inputmode="tel"></div>
-        <div style="margin-bottom:10px"><label for="delivery">Como deseja receber? *</label><select id="delivery" required><option value="">Selecione</option><option>Entrega</option><option>Retirada na loja</option></select></div>
-        <div id="addressFields">
-          <div style="margin-bottom:10px"><label for="address">Endereço de entrega</label><input id="address" placeholder="Rua, número e complemento"></div>
-          <div class="formgrid" style="margin-bottom:10px"><div><label for="neighborhood">Bairro</label><input id="neighborhood" placeholder="Bairro"></div><div><label for="reference">Ponto de referência</label><input id="reference" placeholder="Opcional"></div></div>
+      
+      <h3 style="font-size: 16px; margin-top: 25px; color: #402732;">Dados de Entrega & Contato</h3>
+      <form id="orderForm" onsubmit="sendOrder(event)">
+        <div style="margin-bottom:12px"><label class="selector-label" for="name">Seu nome completo *</label><input id="name" required placeholder="Ex: Maria Silva"></div>
+        <div style="margin-bottom:12px"><label class="selector-label" for="phone">Telefone / WhatsApp</label><input id="phone" placeholder="(21) 99999-9999" inputmode="tel"></div>
+        <div style="margin-bottom:12px"><label class="selector-label" for="delivery">Forma de Envio *</label><select id="delivery" required onchange="toggleAddress()"><option value="">Selecione...</option><option value="Entrega">Receber em Casa (Entrega)</option><option value="Retirada">Retirar na Boutique</option></select></div>
+        
+        <div id="addressFields" style="display:none;">
+          <div style="margin-bottom:12px"><label class="selector-label" for="address">Endereço Completo</label><input id="address" placeholder="Rua, número e apto/casa"></div>
+          <div style="margin-bottom:12px"><label class="selector-label" for="neighborhood">Bairro</label><input id="neighborhood" placeholder="Seu bairro"></div>
+          <div style="margin-bottom:12px"><label class="selector-label" for="reference">Ponto de Referência</label><input id="reference" placeholder="Perto de onde?"></div>
         </div>
-        <div style="margin-bottom:10px"><label for="payment">Forma de pagamento *</label><select id="payment" required><option value="">Selecione</option><option>Pix</option><option>Cartão na entrega/retirada (confirmar disponibilidade)</option><option>Dinheiro</option><option>Combinar pelo WhatsApp</option></select></div>
-        <div style="margin-bottom:12px"><label for="notes">Observações</label><textarea id="notes" rows="2" placeholder="Tamanho, cor, instruções..."></textarea></div>
-        <button class="btn" type="submit">Finalizar pedido pelo WhatsApp</button>
-        <p class="hint">O botão abre o WhatsApp com o resumo do pedido. A loja confirma disponibilidade, frete e pagamento diretamente com você.</p>
+
+        <div style="margin-bottom:12px"><label class="selector-label" for="payment">Como deseja pagar? *</label><select id="payment" required><option value="">Selecione...</option><option value="Pix">Pix (Ganhe mimo ou desconto)</option><option value="Cartão">Cartão de Crédito/Débito</option><option value="Dinheiro">Dinheiro</option></select></div>
+        <div style="margin-bottom:16px"><label class="selector-label" for="notes">Preferências ou Ajustes</label><textarea id="notes" rows="2" placeholder="Ex: Chamar no WhatsApp para ver estampas disponíveis..."></textarea></div>
+        
+        <button class="btn" type="submit" style="font-size:16px; padding: 14px;">Enviar Pedido via WhatsApp ➔</button>
+        <p class="hint" style="margin-top: 10px; text-align: center;">Sua sacola será enviada formatada para o nosso atendimento finalizar os detalhes de frete com você!</p>
       </form>
     </aside>
   </div>
 </main>
-<footer>Stephanny Boutique · Moda feminina · Pedidos confirmados pelo WhatsApp</footer>
+
+<footer>Stephanny Boutique · Moda Feminina de Atitude · Todos os direitos reservados.</footer>
 <script>
 const WHATSAPP = "5521976736927";
 
 const products = [
- {id:1,name:"Blusa feminina",category:"Blusas",price:39.90,sizes:["Tamanho único","P","M","G","GG"],colors:["Preto","Branco","Rosa"],icon:"👚"},
- {id:2,name:"Vestido casual",category:"Vestidos",price:79.90,sizes:["Tamanho único","P","M","G","GG"],colors:["Preto","Rosa","Azul"],icon:"👗"},
- {id:3,name:"Calça jeans",category:"Calças e shorts",price:89.90,sizes:["36","38","40","42","44"],colors:["Azul","Preto"],icon:"👖"},
- {id:4,name:"Conjunto feminino",category:"Conjuntos",price:99.90,sizes:["P","M","G","GG"],colors:["Preto","Rosa","Bege"],icon:"🎀"},
- {id:5,name:"Peça Plus Size",category:"Plus Size",price:69.90,sizes:["Tamanho único","P","M","G","GG"],colors:["Preto","Rosa","Azul"],icon:"🌸"},
+ {id:1,name:"Blusa feminina",category:"Blusas",price:39.90,sizes:["Tamanho único","P","M","G","GG"],colors:["Preto","Branco","Rosa","Colorido / Estampado (Consultar opções)"],icon:"👚"},
+ {id:2,name:"Vestido casual",category:"Vestidos",price:79.90,sizes:["Tamanho único","P","M","G","GG"],colors:["Preto","Rosa","Azul","Colorido / Estampado (Consultar opções)"],icon:"👗"},
+ {id:3,name:"Calça jeans",category:"Calças",price:89.90,sizes:["36","38","40","42","44","46"],colors:["Azul","Preto","Colorido / Estampado (Consultar opções)"],icon:"👖"},
+ {id:16,name:"Short",category:"Shorts",price:45.90,sizes:["Tamanho único","36","38","40","42","44","46"],colors:["Jeans","Preto","Branco","Colorido / Estampado (Consultar opções)"],icon:"🩳"},
+ {id:7,name:"Saia feminina",category:"Saias",price:49.90,sizes:["Tamanho único","36","38","40","42","44","46"],colors:["Preto","Jeans","Rosa","Colorido / Estampado (Consultar opções)"],icon:"👗"},
+ {id:4,name:"Conjunto feminino",category:"Conjuntos",price:99.90,sizes:["P","M","G","GG"],colors:["Preto","Rosa","Bege","Colorido / Estampado (Consultar opções)"],icon:"🎀"},
+ {id:5,name:"Blusa Plus Size",category:"Plus Size",price:49.90,sizes:["Tamanho único","G1","G2","G3"],colors:["Preto","Branco","Rosa","Colorido / Estampado (Consultar opções)"],icon:"👚"},
+ {id:17,name:"Calça Plus Size",category:"Plus Size",price:99.90,sizes:["Tamanho único","G1","G2","G3"],colors:["Jeans","Preto","Colorido / Estampado (Consultar opções)"],icon:"👖"},
+ {id:18,name:"Vestido Plus Size",category:"Plus Size",price:89.90,sizes:["Tamanho único","G1","G2","G3"],colors:["Preto","Rosa","Azul","Colorido / Estampado (Consultar opções)"],icon:"👗"},
+ {id:19,name:"Conjunto Plus Size",category:"Plus Size",price:109.90,sizes:["Tamanho único","G1","G2","G3"],colors:["Preto","Bege","Vinho","Colorido / Estampado (Consultar opções)"],icon:"🎀"},
+ {id:13,name:"Short Plus Size",category:"Plus Size",price:59.90,sizes:["Tamanho único","G1","G2","G3"],colors:["Preto","Jeans","Bege","Colorido / Estampado (Consultar opções)"],icon:"🩳"},
+ {id:14,name:"Saia Plus Size",category:"Plus Size",price:59.90,sizes:["Tamanho único","G1","G2","G3"],colors:["Preto","Rosa","Estampado","Colorido / Estampado (Consultar opções)"],icon:"👗"},
  {id:6,name:"Acessório",category:"Acessórios",price:19.90,sizes:["Único"],colors:["Dourado","Prateado"],icon:"💎"},
- {id:7,name:"Saia feminina",category:"Saias",price:49.90,sizes:["Tamanho único","P","M","G","GG"],colors:["Preto","Jeans","Rosa"],icon:"👗"},
- {id:8,name:"Bijuteria",category:"Bijuterias e acessórios",price:15.90,sizes:["Único"],colors:["Dourado","Prateado"],icon:"📿"},
+ {id:8,name:"Bijuteria",category:"Bijuterias",price:15.90,sizes:["Único"],colors:["Dourado","Prateado"],icon:"📿"},
  {id:9,name:"Perfume",category:"Perfumes",price:39.90,sizes:["Único"],colors:["Padrão"],icon:"🌸"},
- {id:10,name:"Chinelo feminino",category:"Chinelos",price:29.90,sizes:["34","35","36","37","38","39"],colors:["Preto","Branco","Rosa"],icon:"🩴"},
- {id:11,name:"Sandália feminina",category:"Sandálias",price:49.90,sizes:["34","35","36","37","38","39"],colors:["Preto","Bege","Rosa"],icon:"👡"},
+ {id:10,name:"Chinelo feminino",category:"Calçados",price:29.90,sizes:["34","35","36","37","38","39"],colors:["Preto","Branco","Rosa"],icon:"𩩴"},
+ {id:11,name:"Sandália feminina",category:"Calçados",price:49.90,sizes:["34","35","36","37","38","39"],colors:["Preto","Bege","Rosa"],icon:"👡"},
  {id:12,name:"Maquiagem",category:"Maquiagens",price:19.90,sizes:["Único"],colors:["Consultar opções"],icon:"💄"}
 ];
-let cart=[];
-const brl=v=>v.toLocaleString("pt-BR",{style:"currency",currency:"BRL"});
-function renderProducts(){
- const q=document.querySelector("#search").value.toLowerCase();
- document.querySelector("#products").innerHTML=products.filter(p=>(p.name+" "+p.category).toLowerCase().includes(q)).map(p=>`
- <article class="card"><div class="productpic">${p.icon}</div><div class="cardbody">
- <h3>${p.name}</h3><div class="muted">${p.category}</div><div class="price">${brl(p.price)}</div>
- <label for="size${p.id}">Tamanho</label><select id="size${p.id}">${p.sizes.map(s=>`<option>${s}</option>`).join("")}</select>
- <button class="btn" onclick="addToCart(${p.id})">Adicionar ao carrinho</button>
- </div></article>`).join("");
+
+let cart = [];
+let selectedCategory = "Todos";
+
+const brl = v => v.toLocaleString("pt-BR", { style: "currency", currency: "BRL" });
+
+function renderCategories() {
+  const categories = ["Todos", ...new Set(products.map(p => p.category))];
+  document.querySelector("#categoryContainer").innerHTML = categories.map(cat => `
+    <button class="cat-btn ${cat === selectedCategory ? 'active' : ''}" onclick="filterCategory('${cat}')">${cat}</button>
+  `).join("");
 }
-function addToCart(id){const p=products.find(x=>x.id===id);const size=document.querySelector("#size"+id).value;const found=cart.find(x=>x.id===id&&x.size===size);if(found)found.qty++;else cart.push({...p,size,qty:1});renderCart();}
-function changeQty(id,size,delta){const item=cart.find(x=>x.id===id&&x.size===size);if(item)item.qty+=delta;cart=cart.filter(x=>x.qty>0);renderCart();}
-function renderCart(){
- const el=document.querySelector("#cart");
- if(!cart.length)el.innerHTML='<p class="muted">Seu carrinho está vazio. Adicione uma peça para começar.</p>';
- else el.innerHTML=cart.map(i=>`<div class="cartrow"><div><strong>${i.name}</strong><div class="muted">Tamanho: ${i.size} · ${brl(i.price)} cada</div><div><strong>${brl(i.price*i.qty)}</strong></div></div><div class="qty"><button type="button" aria-label="Diminuir" onclick='changeQty(${i.id},${JSON.stringify(i.size)},-1)'>−</button><span>${i.qty}</span><button type="button" aria-label="Aumentar" onclick='changeQty(${i.id},${JSON.stringify(i.size)},1)'>+</button></div></div>`).join("");
- document.querySelector("#cartCount").textContent=cart.reduce((s,i)=>s+i.qty,0);
- document.querySelector("#total").textContent=brl(cart.reduce((s,i)=>s+i.price*i.qty,0));
+
+function filterCategory(cat) {
+  selectedCategory = cat;
+  renderCategories();
+  renderProducts();
 }
-document.querySelector("#delivery").addEventListener("change",e=>{document.querySelector("#addressFields").style.display=e.target.value==="Entrega"?"block":"none";});
-document.querySelector("#search").addEventListener("input",renderProducts);
-document.querySelector("#orderForm").addEventListener("submit",e=>{
- e.preventDefault();
- if(!cart.length){alert("Adicione pelo menos um produto ao carrinho.");return;}
- const name=document.querySelector("#name").value.trim();
- const phone=document.querySelector("#phone").value.trim();
- const delivery=document.querySelector("#delivery").value;
- const address=document.querySelector("#address").value.trim();
- const neighborhood=document.querySelector("#neighborhood").value.trim();
- if(delivery==="Entrega"&&(!address||!neighborhood)){alert("Para entrega, preencha o endereço e o bairro.");return;}
- const payment=document.querySelector("#payment").value;
- const lines=cart.map(i=>`• ${i.name} | Tam. ${i.size} | Qtd. ${i.qty} | ${brl(i.price*i.qty)}`).join("\n");
- const total=brl(cart.reduce((s,i)=>s+i.price*i.qty,0));
- const msg=`Olá, Stephanny Boutique! Quero fazer este pedido:\n\n${lines}\n\n*Total dos produtos: ${total}*\n\n*Cliente:* ${name}\n*Telefone:* ${phone||"Não informado"}\n*Recebimento:* ${delivery}\n${delivery==="Entrega"?`*Endereço:* ${address}\n*Bairro:* ${neighborhood}\n*Referência:* ${document.querySelector("#reference").value.trim()||"Não informada"}\n`:""}*Pagamento:* ${payment}\n*Observações:* ${document.querySelector("#notes").value.trim()||"Nenhuma"}\n\nPor favor, confirme disponibilidade, valor da entrega e os próximos passos.`;
- window.open(`https://wa.me/${WHATSAPP}?text=${encodeURIComponent(msg)}`,"_blank");
-});
-renderProducts();renderCart();
+
+function renderProducts() {
+  const q = document.querySelector("#search").value.toLowerCase();
+  let filtered = products.filter(p => (p.name + " " + p.category).toLowerCase().includes(q));
+  
+  if (selectedCategory !== "Todos") {
+    filtered = filtered.filter(p => p.category === selectedCategory);
+  }
+
+  document.querySelector("#products").innerHTML = filtered.map(p => `
+    <article class="card">
+      <div class="productpic">${p.icon}</div>
+      <div class="cardbody">
+        <div class="muted">${p.category}</div>
+        <h3>${p.name}</h3>
+        <div class="price">
+          <span class="from-text">A partir de</span>
+          ${brl(p.price)}
+        </div>
+        
+        <label class="selector-label" for="size${p.id}">Escolha o Tamanho:</label>
+        <select id="size${p.id}">${p.sizes.map(s => `<option value="s">{s}</option>`).join("")}</select>
+        
+        <label class="selector-label" for="color${p.id}">Escolha a Cor:</label>
+        <select id="color${p.id}">${p.colors.map(c => `<option value="c">{c}</option>`).join("")}</select>
+        
+        <button class="btn" style="margin-top: 10px;" onclick="addToCart(${p.id})">Adicionar à Sacola</button>
+      </div>
+    </article>
+  `).join("");
+}
+
+function addToCart(id) {
+  const p = products.find(prod => prod.id === id);
+  const size = document.querySelector(`#size${id}`).value;
+  const color = document.querySelector(`#color${id}`).value;
+  
+  const existing = cart.find(item => item.id === id && item.size === size && item.color === color);
+  
+  if (existing) {
+    existing.qty++;
+  } else {
+    cart.push({ ...p, size, color, qty: 1 });
+  }
+  updateCart();
+}
+
+function changeQty(index, amt) {
+  cart[index].qty += amt;
+  if (cart[index].qty <= 0) cart.splice(index, 1);
+  updateCart();
+}
+
+function updateCart() {
+  const totalItems = cart.reduce((sum, item) => sum + item.qty, 0);
+  document.querySelector("#cartCount").innerText = totalItems;
+  
+  const cartDiv = document.querySelector("#cart");
+  if (cart.length === 0) {
+    cartDiv.innerHTML = `<p class="muted">Sua sacola está vazia. Adicione uma peça linda para começar!</p>`;
+    document.querySelector("#total").innerText = brl(0);
+    return;
+  }
+  
+  let total = 0;
+  cartDiv.innerHTML = cart.map((item, index) => {
+    total += item.price * item.qty;
+    return `
+      <div class="cartrow">
+        <div>
+          <strong style="color:#8c274c">${item.name}</strong> <span class="muted">(${item.size} / ${item.color})</span>
+          <div class="qty">
+            <button type="button" onclick="changeQty(${index}, -1)">-</button>
+            <span>${item.qty} un</span>
+            <button type="button" onclick="changeQty(${index}, 1)">+</button>
+          </div>
+        </div>
+        <div style="font-weight:600; align-self: center;">${brl(item.price * item.qty)}</div>
+      </div>
+    `;
+  }).join("");
+  
+  document.querySelector("#total").innerText = brl(total);
+}
+
+function toggleAddress() {
+  const delivery = document.querySelector("#delivery").value;
+  document.querySelector("#addressFields").style.display = delivery === "Entrega" ? "block" : "none";
+}
+
+function sendOrder(e) {
+  e.preventDefault();
+  if (cart.length === 0) {
+    alert("Sua sacola está vazia!");
+    return;
+  }
+  
+  let text = `🛍️ *NOVO PEDIDO - STEPHANNY BOUTIQUE*\n\n`;
+  text += `👤 *Cliente:* ${document.querySelector("#name").value}\n`;
+  text += `📱 *WhatsApp:* ${document.querySelector("#phone").value || "Não informado"}\n\n`;
+  
+  text += `📦 *Produtos Escolhidos:*\n`;
+  let total = 0;
+  cart.forEach(item => {
+    text += `• ${item.qty}x ${item.name} [Tam: ${item.size} | Cor: ${item.color}] - ${brl(item.price * item.qty)}\n`;
+    total += item.price * item.qty;
+  });
+  text += `\n💰 *Total das Peças:* ${brl(total)}\n\n`;
+  
+  const delivery = document.querySelector("#delivery").value;
+  text += `🚚 *Forma de Envio:* ${delivery}\n`;
+  if (delivery === "Entrega") {
+    text += `📍 *Endereço:* ${document.querySelector("#address").value}\n`;
+    text += `🏡 *Bairro:* ${document.querySelector("#neighborhood").value}\n`;
+    text += `🔍 *Ref:* ${document.querySelector("#reference").value || "-"}\n`;
+  }
+  
+  text += `💳 *Pagamento:* ${document.querySelector("#payment").value}\n`;
+  const notes = document.querySelector("#notes").value;
+  if (notes) text += `📝 *Obs:* ${notes}\n`;
+  
+  window.open(`https://whatsapp.com{WHATSAPP}&text=${encodeURIComponent(text)}`);
+}
+
+renderCategories();
+renderProducts();
 </script>
 </body>
 </html>
