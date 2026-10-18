@@ -212,28 +212,38 @@ function renderProducts() {
     filtered = filtered.filter(p => p.category === selectedCategory);
   }
 
-  document.querySelector("#products").innerHTML = filtered.map(p => `
-    <article class="card">
-      <div class="productpic">${p.icon}</div>
-      <div class="cardbody">
-        <div class="muted">${p.category}</div>
-        <h3>${p.name}</h3>
-        <div class="price">
-          <span class="from-text">A partir de</span>
-          ${brl(p.price)}
-        </div>
-        
-        <label class="selector-label" for="size${p.id}">Escolha o Tamanho:</label>
-        <select id="size${p.id}">${p.sizes.map(s => `<option value="\({s}">\){s}</option>`).join("")}</select>
-        
-        <label class="selector-label" for="color${p.id}">Escolha a Cor:</label>
-        <select id="color${p.id}">${p.colors.map(c => `<option value="\({c}">\){c}</option>`).join("")}</select>
-        
-        <button class="btn" style="margin-top: 10px;" onclick="addToCart(${p.id})">Adicionar à Sacola</button>
-      </div>
-    </article>
-  `).join("");
+  let html = "";
+  for (let i = 0; i < filtered.length; i++) {
+    let p = filtered[i];
+    
+    let sizeOptions = "";
+    for (let j = 0; j < p.sizes.length; j++) {
+      sizeOptions += "<option value='" + p.sizes[j] + "'>" + p.sizes[j] + "</option>";
+    }
+    
+    let colorOptions = "";
+    for (let k = 0; k < p.colors.length; k++) {
+      colorOptions += "<option value='" + p.colors[k] + "'>" + p.colors[k] + "</option>";
+    }
+
+    html += "<article class='card'>" +
+      "<div class='productpic'>" + p.icon + "</div>" +
+      "<div class='cardbody'>" +
+        "<div class='muted'>" + p.category + "</div>" +
+        "<h3>" + p.name + "</h3>" +
+        "<div class='price'><span class='from-text'>A partir de</span>" + brl(p.price) + "</div>" +
+        "<label class='selector-label' for='size" + p.id + "'>Escolha o Tamanho:</label>" +
+        "<select id='size" + p.id + "'>" + sizeOptions + "</select>" +
+        "<label class='selector-label' for='color" + p.id + "'>Escolha a Cor:</label>" +
+        "<select id='color" + p.id + "'>" + colorOptions + "</select>" +
+        "<button class='btn' style='margin-top: 10px;' onclick='addToCart(" + p.id + ")'>Adicionar à Sacola</button>" +
+      "</div>" +
+    "</article>";
+  }
+  
+  document.querySelector("#products").innerHTML = html;
 }
+
 
 
 function addToCart(id) {
