@@ -311,32 +311,46 @@ function sendOrder(e) {
     return;
   }
   
-  let text = `🛍️ *NOVO PEDIDO - STEPHANNY BOUTIQUE*\n\n`;
-  text += `👤 *Cliente:* ${document.querySelector("#name").value}\n`;
-  text += `📱 *WhatsApp:* ${document.querySelector("#phone").value || "Não informado"}\n\n`;
+  var nameField = document.querySelector("#name").value;
+  var phoneField = document.querySelector("#phone").value || "Não informado";
+  var deliveryField = document.querySelector("#delivery").value;
+  var paymentField = document.querySelector("#payment").value;
+  var notesField = document.querySelector("#notes").value;
   
-  text += `📦 *Produtos Escolhidos:*\n`;
-  let total = 0;
-  cart.forEach(item => {
-    text += `• ${item.qty}x ${item.name} [Tam: ${item.size} | Cor: ${item.color}] - ${brl(item.price * item.qty)}\n`;
-    total += item.price * item.qty;
-  });
-  text += `\n💰 *Total das Peças:* ${brl(total)}\n\n`;
+  var text = "🛍️ *NOVO PEDIDO - STEPHANNY BOUTIQUE*\n\n" +
+             "👤 *Cliente:* " + nameField + "\n" +
+             "📱 *WhatsApp:* " + phoneField + "\n\n" +
+             "📦 *Produtos Escolhidos:*\n";
   
-  const delivery = document.querySelector("#delivery").value;
-  text += `🚚 *Forma de Envio:* ${delivery}\n`;
-  if (delivery === "Entrega") {
-    text += `📍 *Endereço:* ${document.querySelector("#address").value}\n`;
-    text += `🏡 *Bairro:* ${document.querySelector("#neighborhood").value}\n`;
-    text += `🔍 *Ref:* ${document.querySelector("#reference").value || "-"}\n`;
+  var total = 0;
+  for (var i = 0; i < cart.length; i++) {
+    var item = cart[i];
+    var itemTotal = item.price * item.qty;
+    total += itemTotal;
+    text += "• " + item.qty + "x " + item.name + " [Tam: " + item.size + " | Cor: " + item.color + "] - " + brl(itemTotal) + "\n";
   }
   
-  text += `💳 *Pagamento:* ${document.querySelector("#payment").value}\n`;
-  const notes = document.querySelector("#notes").value;
-  if (notes) text += `📝 *Obs:* ${notes}\n`;
+  text += "\n💰 *Total das Peças:* " + brl(total) + "\n\n" +
+          "🚚 *Forma de Envio:* " + deliveryField + "\n";
   
-  window.open(`https://whatsapp.com{WHATSAPP}&text=${encodeURIComponent(text)}`);
+  if (deliveryField === "Entrega") {
+    var addressField = document.querySelector("#address").value;
+    var neighborhoodField = document.querySelector("#neighborhood").value;
+    var referenceField = document.querySelector("#reference").value || "-";
+    
+    text += "📍 *Endereço:* " + addressField + "\n" +
+            "🏡 *Bairro:* " + neighborhoodField + "\n" +
+            "🔍 *Ref:* " + referenceField + "\n";
+  }
+  
+  text += "💳 *Pagamento:* " + paymentField + "\n";
+  if (notesField) {
+    text += "📝 *Obs:* " + notesField + "\n";
+  }
+  
+  window.open("https://whatsapp.com" + WHATSAPP + "&text=" + encodeURIComponent(text));
 }
+
 
 renderCategories();
 renderProducts();
