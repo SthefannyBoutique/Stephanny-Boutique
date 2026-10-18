@@ -224,16 +224,17 @@ function renderProducts() {
         </div>
         
         <label class="selector-label" for="size${p.id}">Escolha o Tamanho:</label>
-        <select id="size${p.id}">${p.sizes.map(s => `<option value="s">{s}</option>`).join("")}</select>
+        <select id="size${p.id}">${p.sizes.map(s => `<option value="\({s}">\){s}</option>`).join("")}</select>
         
         <label class="selector-label" for="color${p.id}">Escolha a Cor:</label>
-        <select id="color${p.id}">${p.colors.map(c => `<option value="c">{c}</option>`).join("")}</select>
+        <select id="color${p.id}">${p.colors.map(c => `<option value="\({c}">\){c}</option>`).join("")}</select>
         
         <button class="btn" style="margin-top: 10px;" onclick="addToCart(${p.id})">Adicionar à Sacola</button>
       </div>
     </article>
   `).join("");
 }
+
 
 function addToCart(id) {
   const p = products.find(prod => prod.id === id);
